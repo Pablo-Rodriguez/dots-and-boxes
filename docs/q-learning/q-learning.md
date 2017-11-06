@@ -14,5 +14,5 @@ Terminología rara que conviene tener clara antes de nada.
   + Discount factor: The discount factor is a parameter in the q-learning algorithm, affecting the importace of future feedback. A high discount factor increases the importance of future feedback.
 
 ## Consideraciones
-  + Se antoja difícil que este algoritmo pueda ser util en el caso que nos ocupa puesto que requeriría una cantidad ingente de memoria (que además haría muy lento el algoritmo) y requeriría mucho entrenamiento para que alcanzase un nivel de juego decente.
+  + Resulta difícil que este algoritmo pueda ser útil en el caso que nos ocupa puesto que requeriría una cantidad ingente de memoria (que además haría muy lento el algoritmo) y mucho entrenamiento para alcanzar un nivel de juego decente.
   + Además, aunque sí tiene en cuenta cómo juega el adversario, no aporta mucho más a lo que ya consigue minimax.
