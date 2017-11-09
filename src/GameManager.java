@@ -3,11 +3,14 @@ import java.util.*;
 public class GameManager {
   private ArrayList<Edge> edges = new ArrayList<Edge>();
   private Box[][] matrix;
+  private int playerPoints = 0;
+  private int machinePoints = 0;
+  private boolean player;
 
   public GameManager(int rows, int columns) {
     matrix = new Box[rows][columns];
     populateMatrix();
-    System.out.println("New " + rows + "x" + columns + " board started!");
+    run();
   }
 
   public boolean addEdge(Edge newEdge) {
@@ -48,7 +51,87 @@ public class GameManager {
     Box b = matrix[x][y];
     b.addEdge();
     if (b.getEdges() == 4) {
-      System.out.println("Box filled");
+      if (player) {
+        this.playerPoints++;
+      } else {
+        this.machinePoints++;
+      }
+    }
+  }
+
+  private void run() {
+    Scanner scan = new Scanner(System.in);
+    while (true) {
+      System.out.print("\033[H\033[2J");
+      System.out.flush();
+      System.out.printf("New %dx%d board started!\n", this.matrix.length, this.matrix.length);
+      drawBoard();
+      System.out.printf("Player: %d \tMachine: %d\n", this.playerPoints, this.machinePoints);
+      this.player = true;
+      System.out.print("Enter initial point (x0 y0): ");
+      String s = scan.nextLine();
+      int x0 = Integer.parseInt(s.split(" ")[0]);
+      int y0 = Integer.parseInt(s.split(" ")[1]);
+      System.out.print("Enter terminal point (x1 y1): ");
+      s = scan.nextLine();
+      int x1 = Integer.parseInt(s.split(" ")[0]);
+      int y1 = Integer.parseInt(s.split(" ")[1]);
+      if (!this.addEdge(new Edge(x0, y0, x1, y1, player))) {
+        break;
+      }
+    }
+    scan.close();
+  }
+
+  private void drawBoard() {
+    System.out.println("\n\n\n\n\n\n");
+    for (int i = 0; i < this.matrix.length + 1; i++) {
+      for (int k = 0; k < this.matrix.length + 1; k++) {
+        drawRow(k, i);
+      }
+      System.out.print("\n");
+      for (int intro = 0; intro < 7; intro++) {
+        for (int k = 0; k < this.matrix.length + 1; k++) {
+          drawColumn(i, i + 1, k);
+        }
+        System.out.print("\n");
+      }
+    }
+  }
+
+  private void drawRow(int x, int y) {
+    if (x == 0) {
+      System.out.printf("%14s", "*");
+    } else {
+      Edge newEdge = new Edge(x - 1, y, x, y, false);
+      for (Edge e : edges) {
+        if (e.equals(newEdge)) {
+          System.out.print("--------------");
+          newEdge = null;
+          break;
+        }
+      }
+      if (newEdge != null) {
+        System.out.printf("%14s", "");
+      }
+      System.out.print("*");
+    }
+  }
+
+  private void drawColumn(int y0, int y1, int x) {
+    Edge newEdge = new Edge(x, y0, x, y1, false);
+    if (x == 0) {
+      System.out.printf("%13s", "");
+    }
+    for (Edge e : edges) {
+      if (e.equals(newEdge)) {
+        System.out.printf("%-15s", "|");
+        newEdge = null;
+        break;
+      }
+    }
+    if (newEdge != null) {
+      System.out.printf("%15s", "");
     }
   }
 }
