@@ -3,6 +3,7 @@ import java.util.*;
 public class GameManager {
   private ArrayList<Edge> edges = new ArrayList<Edge>();
   private Box[][] matrix;
+  private Machine machine;
   private int playerPoints = 0;
   private int machinePoints = 0;
   private boolean player;
@@ -10,6 +11,7 @@ public class GameManager {
   public GameManager(int rows, int columns) {
     matrix = new Box[rows][columns];
     populateMatrix();
+    machine = new Machine(edges, matrix, rows, columns);
     run();
   }
 
@@ -62,23 +64,28 @@ public class GameManager {
   private void run() {
     Scanner scan = new Scanner(System.in);
     while (true) {
-      System.out.print("\033[H\033[2J");
-      System.out.flush();
-      System.out.printf("New %dx%d board started!\n", this.matrix.length, this.matrix.length);
-      drawBoard();
-      System.out.printf("Player: %d \tMachine: %d\n", this.playerPoints, this.machinePoints);
-      this.player = true;
-      System.out.print("Enter initial point (x0 y0): ");
-      String s = scan.nextLine();
-      int x0 = Integer.parseInt(s.split(" ")[0]);
-      int y0 = Integer.parseInt(s.split(" ")[1]);
-      System.out.print("Enter terminal point (x1 y1): ");
-      s = scan.nextLine();
-      int x1 = Integer.parseInt(s.split(" ")[0]);
-      int y1 = Integer.parseInt(s.split(" ")[1]);
-      if (!this.addEdge(new Edge(x0, y0, x1, y1, player))) {
-        break;
+      if (player) {
+        System.out.println(player);
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+        System.out.printf("New %dx%d board started!\n", this.matrix.length, this.matrix.length);
+        drawBoard();
+        System.out.printf("Player: %d \tMachine: %d\n", this.playerPoints, this.machinePoints);
+        System.out.print("Enter initial point (x0 y0): ");
+        String s = scan.nextLine();
+        int x0 = Integer.parseInt(s.split(" ")[0]);
+        int y0 = Integer.parseInt(s.split(" ")[1]);
+        System.out.print("Enter terminal point (x1 y1): ");
+        s = scan.nextLine();
+        int x1 = Integer.parseInt(s.split(" ")[0]);
+        int y1 = Integer.parseInt(s.split(" ")[1]);
+        if (!this.addEdge(new Edge(x0, y0, x1, y1, player))) {
+          break;
+        }
+      } else {
+        this.addEdge(machine.play());
       }
+      this.player = !this.player;
     }
     scan.close();
   }
