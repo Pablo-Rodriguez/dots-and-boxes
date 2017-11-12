@@ -4,7 +4,7 @@
 ## 1. Data Structure
 
 ```js
-Arista {
+Edge {
   x0: Number,
   y0: Number,
   x1: Number,
@@ -12,17 +12,17 @@ Arista {
   player: Boolean|Number
 }
 
-Aristas = [Arista, Arista, ...]
+Edge = [Edge, Edge, ...]
 
-Square {
+Box {
   owner: Boolean|Number|Char...
 }
 
-Squares = [
-  [Square, Square, Square, Square],
-  [Square, Square, Square, Square],
-  [Square, Square, Square, Square],
-  [Square, Square, Square, Square]
+Boxs = [
+  [Box, Box, Box, Box],
+  [Box, Box, Box, Box],
+  [Box, Box, Box, Box],
+  [Box, Box, Box, Box]
 ]
 
 ```
