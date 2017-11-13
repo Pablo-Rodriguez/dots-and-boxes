@@ -18,10 +18,12 @@ public class Edge {
   }
 
   public boolean equals(Edge e) {
-    if (this.x0 != e.x0 || this.y0 != e.y0 || this.x1 != e.x1 || this.y1 != e.y1) {
+    if ((this.x0 == e.x0 && this.y0 == e.y0 && this.x1 == e.x1 && this.y1 == e.y1) ||
+        (this.x0 == e.x1 && this.y0 == e.y1 && this.x1 == e.x0 && this.y1 == e.y0)) {
+      return true;
+    } else {
       return false;
     }
-    return true;
   }
 
   public boolean isHorizontal() {
