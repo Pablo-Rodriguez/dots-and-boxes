@@ -4,8 +4,8 @@ public class GameManager {
   private ArrayList<Edge> edges = new ArrayList<Edge>();
   private Box[][] matrix;
   private Machine machine;
-  private int playerPoints = 0;
-  private int machinePoints = 0;
+  public int playerPoints = 0;
+  public int machinePoints = 0;
   private boolean player;
 
   public GameManager(int rows, int columns) {
@@ -14,16 +14,26 @@ public class GameManager {
     machine = new Machine(edges, matrix, rows, columns);
     run();
   }
-
-  public boolean addEdge(Edge newEdge) {
+    public boolean addEdge(Edge newEdge) {
     for (Edge e : edges) {
       if (e.equals(newEdge)) {
         return false;
       }
     }
     edges.add(newEdge);
-    checkBoxes(newEdge);
+    checkBoxes(newEdge, true);
     return true;
+  }
+
+  public void removeEdge(int x0, int y0, int x1, int y1){
+    Iterator<Edge> it = edges.iterator();
+    while (it.hasNext()) {
+      Edge edge = it.next();
+      if (edge.x0 == x0 && edge.y0 == y0 && edge.x1 == x1 && edge.y1 == y1) {
+        checkBoxes(edge, false);
+        it.remove();
+      }
+    }
   }
 
   private void populateMatrix() {
@@ -34,24 +44,28 @@ public class GameManager {
     }
   }
 
-  private void checkBoxes(Edge newEdge) {
+  private void checkBoxes(Edge newEdge, boolean isNew) {
     int x = newEdge.x0 == matrix[0].length ? newEdge.x0 - 1 : newEdge.x0;
     int y = newEdge.y0 == matrix.length ? newEdge.y0 - 1 : newEdge.y0;
-    checkBox(x, y);
+    checkBox(x, y, isNew);
     if (newEdge.isHorizontal()) {
       if (newEdge.y0 > 0 && newEdge.y0 < matrix.length) {
-        checkBox(x, newEdge.y0 - 1);
+        checkBox(x, newEdge.y0 - 1, isNew);
       }
     } else {
       if (newEdge.x0 > 0 && newEdge.x0 < matrix[y].length) {
-        checkBox(newEdge.x0 - 1, y);
+        checkBox(newEdge.x0 - 1, y, isNew);
       }
     }
   }
 
-  private void checkBox(int x, int y) {
+  private void checkBox(int x, int y, boolean isNew) {
     Box b = matrix[x][y];
-    b.addEdge();
+    if(isNew){
+      b.addEdge();
+    }else{
+      b.removeEdge();
+    }
     if (b.getEdges() == 4) {
       if (player) {
         this.playerPoints++;
@@ -83,14 +97,14 @@ public class GameManager {
           break;
         }
       } else {
-        this.addEdge(machine.play());
+        this.addEdge(machine.play(this));
       }
       this.player = !this.player;
     }
     scan.close();
   }
 
-  private void drawBoard() {
+  public void drawBoard() {
     System.out.println("\n\n\n\n\n\n");
     for (int i = 0; i < this.matrix.length + 1; i++) {
       for (int k = 0; k < this.matrix.length + 1; k++) {

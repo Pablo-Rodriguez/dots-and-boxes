@@ -17,6 +17,10 @@ public class Box {
     this.edges++;
   }
 
+  public void removeEdge(){
+    this.edges--;
+  }
+
   public int getEdges() {
     return this.edges;
   }
