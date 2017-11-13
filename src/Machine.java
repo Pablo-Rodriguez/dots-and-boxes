@@ -1,4 +1,3 @@
-
 import java.util.*;
 
 public class Machine {
@@ -30,12 +29,11 @@ public class Machine {
     return false;
   }
 
-  public Edge play () {
-    if (canPlaySafely()) {
-      return qlearning.play();
-    } else {
-      return minimax.play();
-    }
+  public Edge play (GameManager gm) {
+  //  if (canPlaySafely()) {
+    //  return qlearning.play();
+    //} else {
+      return minimax.play(gm);
+    //}
   }
 }
-
