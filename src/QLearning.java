@@ -3,23 +3,17 @@ import java.util.*;
 
 public class QLearning {
   
-  private ArrayList<Edge> edges;
-  private Box[][] matrix;
-  private int rows;
-  private int columns;
+  private GameData gameData;
   private StateActionPair stateActionPair;
 
-  public QLearning (ArrayList<Edge> edges, Box[][] matrix, int rows, int columns) {
-    this.edges = edges;
-    this.rows = rows;
-    this.columns = columns;
-    this.matrix = matrix;
-    this.stateActionPair = new StateActionPair(edges);
+  public QLearning (GameData gameData) {
+    this.gameData = gameData;
+    this.stateActionPair = new StateActionPair(gameData.getEdges());
   }
 
   public Edge play () {
-    for (int y = 1; y < rows; y++) {
-      for (int x = 1; x < columns; x++) {
+    for (int y = 1; y < gameData.getRows(); y++) {
+      for (int x = 1; x < gameData.getColumns(); x++) {
         stateActionPair.getPair(x, y);
       }
     }

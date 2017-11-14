@@ -1,90 +1,28 @@
 import java.util.*;
 
 public class GameManager {
-  private ArrayList<Edge> edges = new ArrayList<Edge>();
-  private Box[][] matrix;
+  private GameData gameData;
   private Machine machine;
-  public int playerPoints = 0;
-  public int machinePoints = 0;
-  private boolean player;
 
   public GameManager(int rows, int columns) {
-    matrix = new Box[rows][columns];
-    populateMatrix();
-    machine = new Machine(edges, matrix, rows, columns);
+    gameData = new GameData(rows, columns);
+    machine = new Machine(gameData);
     run();
   }
-    public boolean addEdge(Edge newEdge) {
-    for (Edge e : edges) {
-      if (e.equals(newEdge)) {
-        return false;
-      }
-    }
-    edges.add(newEdge);
-    checkBoxes(newEdge, true);
-    return true;
-  }
 
-  public void removeEdge(int x0, int y0, int x1, int y1){
-    Iterator<Edge> it = edges.iterator();
-    while (it.hasNext()) {
-      Edge edge = it.next();
-      if (edge.x0 == x0 && edge.y0 == y0 && edge.x1 == x1 && edge.y1 == y1) {
-        checkBoxes(edge, false);
-        it.remove();
-      }
-    }
-  }
-
-  private void populateMatrix() {
-    for (int x = 0; x < this.matrix.length; x++) {
-      for (int y = 0; y < this.matrix[x].length; y++) {
-        matrix[x][y] = new Box();
-      }
-    }
-  }
-
-  private void checkBoxes(Edge newEdge, boolean isNew) {
-    int x = newEdge.x0 == matrix[0].length ? newEdge.x0 - 1 : newEdge.x0;
-    int y = newEdge.y0 == matrix.length ? newEdge.y0 - 1 : newEdge.y0;
-    checkBox(x, y, isNew);
-    if (newEdge.isHorizontal()) {
-      if (newEdge.y0 > 0 && newEdge.y0 < matrix.length) {
-        checkBox(x, newEdge.y0 - 1, isNew);
-      }
-    } else {
-      if (newEdge.x0 > 0 && newEdge.x0 < matrix[y].length) {
-        checkBox(newEdge.x0 - 1, y, isNew);
-      }
-    }
-  }
-
-  private void checkBox(int x, int y, boolean isNew) {
-    Box b = matrix[x][y];
-    if(isNew){
-      b.addEdge();
-    }else{
-      b.removeEdge();
-    }
-    if (b.getEdges() == 4) {
-      if (player) {
-        this.playerPoints++;
-      } else {
-        this.machinePoints++;
-      }
-    }
+  public GameData getGameData () {
+    return gameData;
   }
 
   private void run() {
     Scanner scan = new Scanner(System.in);
     while (true) {
-      if (player) {
-        System.out.println(player);
+      if (gameData.isPlayerTurn()) {
         System.out.print("\033[H\033[2J");
         System.out.flush();
-        System.out.printf("New %dx%d board started!\n", this.matrix.length, this.matrix.length);
+        System.out.printf("New %dx%d board started!\n", gameData.getMatrix().length, gameData.getMatrix()[0].length);
         drawBoard();
-        System.out.printf("Player: %d \tMachine: %d\n", this.playerPoints, this.machinePoints);
+        System.out.printf("Player: %d \tMachine: %d\n", gameData.getPlayerPoints(), gameData.getMachinePoints());
         System.out.print("Enter initial point (x0 y0): ");
         String s = scan.nextLine();
         int x0 = Integer.parseInt(s.split(" ")[0]);
@@ -93,26 +31,26 @@ public class GameManager {
         s = scan.nextLine();
         int x1 = Integer.parseInt(s.split(" ")[0]);
         int y1 = Integer.parseInt(s.split(" ")[1]);
-        if (!this.addEdge(new Edge(x0, y0, x1, y1, player))) {
+        if (!gameData.addEdge(new Edge(x0, y0, x1, y1, true))) {
           break;
         }
       } else {
-        this.addEdge(machine.play(this));
+        gameData.addEdge(machine.play());
       }
-      this.player = !this.player;
+      gameData.changeTurn();
     }
     scan.close();
   }
 
   public void drawBoard() {
     System.out.println("\n\n\n\n\n\n");
-    for (int i = 0; i < this.matrix.length + 1; i++) {
-      for (int k = 0; k < this.matrix.length + 1; k++) {
+    for (int i = 0; i < gameData.getMatrix().length + 1; i++) {
+      for (int k = 0; k < gameData.getMatrix()[0].length + 1; k++) {
         drawRow(k, i);
       }
       System.out.print("\n");
       for (int intro = 0; intro < 7; intro++) {
-        for (int k = 0; k < this.matrix.length + 1; k++) {
+        for (int k = 0; k < gameData.getMatrix().length + 1; k++) {
           drawColumn(i, i + 1, k);
         }
         System.out.print("\n");
@@ -125,7 +63,7 @@ public class GameManager {
       System.out.printf("%14s", "*");
     } else {
       Edge newEdge = new Edge(x - 1, y, x, y, false);
-      for (Edge e : edges) {
+      for (Edge e : gameData.getEdges()) {
         if (e.equals(newEdge)) {
           System.out.print("--------------");
           newEdge = null;
@@ -144,7 +82,7 @@ public class GameManager {
     if (x == 0) {
       System.out.printf("%13s", "");
     }
-    for (Edge e : edges) {
+    for (Edge e : gameData.getEdges()) {
       if (e.equals(newEdge)) {
         System.out.printf("%-15s", "|");
         newEdge = null;

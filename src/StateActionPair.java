@@ -9,30 +9,26 @@ public class StateActionPair {
     this.edges = edges;
   }
 
-  public boolean findEdge (int x0, int y0, int x1, int y1) {
+  public String findEdge (int x0, int y0, int x1, int y1) {
     Edge against = new Edge(x0, y0, x1, y1, false);
     for (Edge edge:edges) {
       if (edge.equals(against)) {
-        return true;
+        return "1";
       }
     }
-    return false;
+    return "0";
   }
 
-  private void printState (boolean [] state) {
+  private void printState (String[] state) {
     System.out.print("[");
-    for (boolean edge:state) {
-      if (edge) {
-        System.out.print("1");
-      } else {
-        System.out.print("0");
-      }
+    for (String edge:state) {
+      System.out.print(edge);
     }
     System.out.println("]");
   }
 
-  public void getPair (int x, int y) {
-    boolean[] state = new boolean[12];
+  public int getState (int x, int y) {
+    String[] state = new String[12];
 
     state[0] = findEdge(x - 1, y - 1, x, y - 1);
     state[1] = findEdge(x, y - 1, x + 1, y - 1);
@@ -50,7 +46,11 @@ public class StateActionPair {
     
     state[10] = findEdge(x - 1, y + 1, x, y + 1);
     state[11] = findEdge(x, y + 1, x + 1, y + 1);
-
     printState(state);
+    return Integer.parseInt(String.join("", state), 2);
+  }
+
+  public void getPair (int x, int y) {
+    getState(x, y);
   }
 }
