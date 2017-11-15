@@ -16,11 +16,15 @@ build/Edge.class: src/Edge.java
 	$(compile) src/Edge.java
 build/Machine.class: src/Machine.java build/GameData.class build/QLearning.class build/Minimax.class
 	$(compile) src/Machine.java
-build/QLearning.class: src/QLearning.java build/GameData.class build/StateActionPair.class build/Edge.class build/Box.class
+build/QLearning.class: src/QLearning.java build/Edge.class build/Box.class build/PlayVector.class build/Memory.class build/GameData.class build/StateActionPair.class
 	$(compile) src/QLearning.java
+build/PlayVector.class: src/PlayVector.java
+	$(compile) src/PlayVector.java
+build/Memory.class: src/Memory.java build/PlayVector.class
+	$(compile) src/Memory.java
 build/Minimax.class: src/Minimax.java build/GameData.class build/Edge.class build/Box.class
 	$(compile) src/Minimax.java
-build/StateActionPair.class: src/StateActionPair.java build/GameData.class build/Edge.class
+build/StateActionPair.class: src/StateActionPair.java build/Edge.class build/PlayVector.class
 	$(compile) src/StateActionPair.java
 dir:
 	mkdir -p build

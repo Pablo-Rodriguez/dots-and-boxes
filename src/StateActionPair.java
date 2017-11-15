@@ -3,14 +3,17 @@ import java.util.*;
 
 public class StateActionPair {
 
-  private ArrayList<Edge> edges;
+  private int x;
+  private int y;
+  private PlayVector vector;
 
-  public StateActionPair (ArrayList<Edge> edges) {
-    this.edges = edges;
+  public StateActionPair (ArrayList<Edge> edges, Hashtable<Integer, PlayVector> memory, int x, int y) {
+    this.x = x;
+    this.y = y;
+    this.vector = memory.get(getState(edges, x, y));
   }
 
-  public String findEdge (int x0, int y0, int x1, int y1) {
-    Edge against = new Edge(x0, y0, x1, y1, false);
+  public String findEdge (ArrayList<Edge> edges, Edge against) {
     for (Edge edge:edges) {
       if (edge.equals(against)) {
         return "1";
@@ -18,39 +21,53 @@ public class StateActionPair {
     }
     return "0";
   }
-
-  private void printState (String[] state) {
-    System.out.print("[");
-    for (String edge:state) {
-      System.out.print(edge);
-    }
-    System.out.println("]");
+  
+  public PlayVector getVector () {
+    return this.vector;
   }
 
-  public int getState (int x, int y) {
+  public int getState (ArrayList<Edge> edges, int x, int y) {
     String[] state = new String[12];
+    
+    for (int i = 0; i < state.length; i++) {
+      state[i] = findEdge(edges, actionToEdge(i));
+    }
 
-    state[0] = findEdge(x - 1, y - 1, x, y - 1);
-    state[1] = findEdge(x, y - 1, x + 1, y - 1);
-
-    state[2] = findEdge(x - 1, y - 1, x - 1, y);
-    state[3] = findEdge(x, y - 1, x, y);
-    state[4] = findEdge(x + 1, y - 1, x + 1, y);
-    
-    state[5] = findEdge(x - 1, y, x, y);
-    state[6] = findEdge(x, y, x + 1, y);
-    
-    state[7] = findEdge(x - 1, y, x - 1, y + 1);
-    state[8] = findEdge(x, y, x, y + 1);
-    state[9] = findEdge(x + 1, y, x + 1, y + 1);
-    
-    state[10] = findEdge(x - 1, y + 1, x, y + 1);
-    state[11] = findEdge(x, y + 1, x + 1, y + 1);
-    printState(state);
     return Integer.parseInt(String.join("", state), 2);
   }
 
-  public void getPair (int x, int y) {
-    getState(x, y);
+  private Edge actionToEdge (int i) {
+    switch (i) {
+      case 0:
+        return new Edge(x - 1, y - 1, x, y - 1, false);
+      case 1:
+        return new Edge(x, y - 1, x + 1, y - 1, false);
+      case 2:
+        return new Edge(x - 1, y - 1, x - 1, y, false);
+      case 3:
+        return new Edge(x, y - 1, x, y, false);
+      case 4:
+        return new Edge(x + 1, y - 1, x + 1, y, false);
+      case 5:
+        return new Edge(x - 1, y, x, y, false);
+      case 6:
+        return new Edge(x, y, x + 1, y, false);
+      case 7:
+        return new Edge(x - 1, y, x - 1, y + 1, false);
+      case 8:
+        return new Edge(x, y, x, y + 1, false);
+      case 9:
+        return new Edge(x + 1, y, x + 1, y + 1, false);
+      case 10:
+        return new Edge(x - 1, y + 1, x, y + 1, false);
+      case 11:
+        return new Edge(x, y + 1, x + 1, y + 1, false);
+      default:
+        return new Edge(x - 1, y - 1, x, y - 1, false);
+    }
+  }
+
+  public Edge randomPick () {
+    return actionToEdge(vector.randomPick());
   }
 }
