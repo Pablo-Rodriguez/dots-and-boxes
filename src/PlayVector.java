@@ -24,12 +24,26 @@ public class PlayVector {
     return max;
   }
 
+  public int countNonZero () {
+    int acc = 0;
+    for (double i:vector) {
+      if (i > 0) {
+        acc++;
+      }
+    }
+    return acc;
+  }
+
   public void normalize () {
     double acc = 0;
     for (double i:vector) {
       acc += i;
     }
-    acc = 1 / acc;
+    if (acc != 0) {
+      acc = 1 / acc;
+    } else {
+      acc = 0;
+    }
     for (int i = 0; i < vector.length; i++) {
       vector[i] *= acc;
     }
@@ -49,15 +63,13 @@ public class PlayVector {
 
   @Override
   public String toString () {
-    String str = "[";
+    String str = "";
     for (int i = 0; i < vector.length; i++) {
-      String value = String.valueOf(vector[i]);
-      str += value.length() < 5 ? value : value.substring(0, 4);
+      str += String.valueOf(vector[i]);
       if (i < vector.length - 1) {
-        str += ", ";
+        str += " ";
       }
     }
-    str += "]";
     return str;
   }
 }
