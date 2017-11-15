@@ -32,12 +32,15 @@ public class GameManager {
         int x1 = Integer.parseInt(s.split(" ")[0]);
         int y1 = Integer.parseInt(s.split(" ")[1]);
         if (!gameData.addEdge(new Edge(x0, y0, x1, y1, true))) {
-          break;
+          continue;
         }
       } else {
         gameData.addEdge(machine.play());
       }
-      gameData.changeTurn();
+      if (gameData.getMachinePoints() + gameData.getPlayerPoints() == gameData.getRows() * gameData.getColumns()) {
+        endGame();
+        break;
+      }
     }
     scan.close();
   }
@@ -91,6 +94,19 @@ public class GameManager {
     }
     if (newEdge != null) {
       System.out.printf("%15s", "");
+    }
+  }
+
+  private void endGame() {
+    if (gameData.getMachinePoints() > gameData.getPlayerPoints()) {
+      System.out.println("\n\n\n\nYOU LOSE!\n\n\n\n");
+      System.out.printf("Player: %d \tMachine: %d\n", gameData.getPlayerPoints(), gameData.getMachinePoints());
+    } else if (gameData.getMachinePoints() < gameData.getPlayerPoints()) {
+      System.out.println("\n\n\n\nYOU WIN!\n\n\n\n");
+      System.out.printf("Player: %d \tMachine: %d\n", gameData.getPlayerPoints(), gameData.getMachinePoints());
+    } else {
+      System.out.println("\n\n\n\nTIE!\n\n\n\n");
+      System.out.printf("Player: %d \tMachine: %d\n", gameData.getPlayerPoints(), gameData.getMachinePoints());
     }
   }
 }

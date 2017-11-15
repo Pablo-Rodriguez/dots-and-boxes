@@ -1,12 +1,12 @@
 public class Box {
   private boolean player;
+  private int x;
+  private int y;
   private int edges = 0;
 
-  public Box() {
-  }
-
-  public Box(boolean player) {
-    this.player = player;
+  public Box(int x, int y) {
+    this.x = x;
+    this.y = y;
   }
 
   public boolean isOwnedByPlayer() {
@@ -17,11 +17,15 @@ public class Box {
     this.edges++;
   }
 
-  public void removeEdge(){
-    this.edges--;
-  }
-
   public int getEdges() {
     return this.edges;
+  }
+
+  public int getX(){
+    return this.x;
+  }
+
+  public int getY(){
+    return this.y;
   }
 }

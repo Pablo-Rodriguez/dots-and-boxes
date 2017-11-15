@@ -9,7 +9,7 @@ public class GameData {
   private int columns;
   public int playerPoints = 0;
   public int machinePoints = 0; 
-  public boolean playerTurn = false;
+  public boolean playerTurn = true;
 
   public GameData (int rows, int columns) {
     this.rows = rows;
@@ -50,68 +50,78 @@ public class GameData {
     this.machinePoints = machinePoints;
   }
 
-  public void changeTurn () {
+  private void changeTurn () {
     playerTurn = !playerTurn;
   }
 
   private void populateMatrix() {
     for (int x = 0; x < this.matrix.length; x++) {
       for (int y = 0; y < this.matrix[x].length; y++) {
-        matrix[x][y] = new Box();
+        matrix[x][y] = new Box(x, y);
       }
     }
   }
 
   public boolean addEdge(Edge newEdge) {
+    if (!isEdgeValid(newEdge)) {
+      return false;
+    }
+
     for (Edge e : edges) {
       if (e.equals(newEdge)) {
         return false;
       }
     }
     edges.add(newEdge);
-    checkBoxes(newEdge, true);
+    checkBoxes(newEdge);
     return true;
   }
 
-  public void removeEdge(int x0, int y0, int x1, int y1){
-    Iterator<Edge> it = edges.iterator();
-    while (it.hasNext()) {
-      Edge edge = it.next();
-      if (edge.x0 == x0 && edge.y0 == y0 && edge.x1 == x1 && edge.y1 == y1) {
-        checkBoxes(edge, false);
-        it.remove();
-      }
-    }
-  }
-
-  private void checkBox(int x, int y, boolean isNew) {
+  private int checkBox(int x, int y) {
     Box b = matrix[x][y];
-    if(isNew){
-      b.addEdge();
-    }else{
-      b.removeEdge();
-    }
+    b.addEdge();
     if (b.getEdges() == 4) {
       if (playerTurn) {
         this.playerPoints++;
       } else {
         this.machinePoints++;
       }
+      return 1;
     }
+    return 0;
   }
 
-  private void checkBoxes(Edge newEdge, boolean isNew) {
+  private void checkBoxes(Edge newEdge) {
     int x = newEdge.x0 == matrix[0].length ? newEdge.x0 - 1 : newEdge.x0;
     int y = newEdge.y0 == matrix.length ? newEdge.y0 - 1 : newEdge.y0;
-    checkBox(x, y, isNew);
+    int points = checkBox(x, y);
     if (newEdge.isHorizontal()) {
       if (newEdge.y0 > 0 && newEdge.y0 < matrix.length) {
-        checkBox(x, newEdge.y0 - 1, isNew);
+        points += checkBox(x, newEdge.y0 - 1);
       }
     } else {
       if (newEdge.x0 > 0 && newEdge.x0 < matrix[y].length) {
-        checkBox(newEdge.x0 - 1, y, isNew);
+        points += checkBox(newEdge.x0 - 1, y);
       }
     }
+    if (points == 0) {
+      this.changeTurn();
+    }
+  }
+
+  private boolean isEdgeValid(Edge newEdge) {
+    if (newEdge.x0 < 0 || newEdge.y0 < 0 || newEdge.x1 < 0 || newEdge.y1 < 0) {
+      return false;
+    }
+    if (newEdge.x1 > this.columns || newEdge.y1 > this.rows || newEdge.x0 > this.columns || newEdge.y0 > this.rows) {
+      return false;
+    }
+    if (newEdge.x1 - newEdge.x0 == 1 && newEdge.y1 - newEdge.y0 == 0) {
+      return true;
+    }
+    if (newEdge.x1 - newEdge.x0 == 0 && newEdge.y1 - newEdge.y0 == 1) {
+      return true;
+    }
+    return false;
   }
 }

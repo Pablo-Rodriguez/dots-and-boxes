@@ -1,55 +1,55 @@
 import java.util.*;
-import java.util.concurrent.TimeUnit;
+
 public class Minimax {
 
   private GameData gameData;
-  private boolean foundBox;
 
-  public Minimax (GameData gameData) {
+  public Minimax(GameData gameData) {
     this.gameData = gameData;
   }
 
-  public Edge play () {
-    foundBox = false;
-    Edge e = lookForBox();
-    if (foundBox) {
-      return e;
-    } else {
-      return new Edge(2, 2, 2, 3, false);
+  public Edge play() {
+    ArrayList<Box> boxes = almostClosedBoxes();
+    if (boxes.size() == 1) {
+      return getMissingEdge(boxes.get(0));
     }
+    return getMissingEdge(boxes.get(0));
   }
 
-  private Edge lookForBox(){
-    int machinePoints = gameData.getMachinePoints();
-    for (int i = 0; i < gameData.getMatrix().length; i++) {
-      for (int j = 0; j < gameData.getMatrix().length +1; j++) {
-        if (gameData.addEdge(new Edge(i, j, i + 1, j, false))) {
-          if (gameData.getMachinePoints() > machinePoints) {
-            gameData.setMachinePoints(machinePoints);
-            gameData.removeEdge(i, j, i + 1, j);
-            foundBox = true;
-            return new Edge(i, j, i + 1, j, false);
-          } else {
-            gameData.removeEdge(i, j, i + 1, j);
-          }
+  private ArrayList<Box> almostClosedBoxes() {
+    ArrayList<Box> boxes = new ArrayList<Box>();
+    for (int i = 0; i < gameData.getRows(); i++) {
+      for (int j = 0; j < gameData.getColumns(); j++) {
+        if (gameData.getMatrix()[i][j].getEdges() == 3) {
+          boxes.add(gameData.getMatrix()[i][j]);
         }
       }
     }
-    for (int i = 0; i < gameData.getMatrix().length +1; i++) {
-      for (int j = 0; j < gameData.getMatrix().length; j++) {
-        if (gameData.addEdge(new Edge(i, j, i, j + 1, false))) {
-          if (gameData.getMachinePoints() > machinePoints) {
-            gameData.setMachinePoints(machinePoints);
-            gameData.removeEdge(i, j, i, j + 1);
-            foundBox = true;
-            return new Edge(i, j, i, j + 1, false);
-          } else {
-            gameData.removeEdge(i, j, i, j + 1);
-          }
-        }
+    return boxes;
+  }
+
+  private Edge getMissingEdge(Box b) {
+    Edge e = new Edge(b.getX(), b.getY(), b.getX() + 1, b.getY(), false);
+    if (!edgeExists(e)) {
+      return e;
+    }
+    e = new Edge(b.getX(), b.getY(), b.getX(), b.getY() + 1, false);
+    if (!edgeExists(e)) {
+      return e;
+    }
+    e = new Edge(b.getX() + 1, b.getY(), b.getX() + 1, b.getY() + 1, false);
+    if (!edgeExists(e)) {
+      return e;
+    }
+    return new Edge(b.getX(), b.getY() + 1, b.getX() + 1, b.getY() + 1, false);
+  }
+
+  private boolean edgeExists(Edge newEdge) {
+    for (Edge e : this.gameData.getEdges()) {
+      if (e.equals(newEdge)) {
+        return true;
       }
     }
-    return new Edge(10,10,10,10,false);
+    return false;
   }
 }
-
