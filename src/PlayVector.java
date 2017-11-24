@@ -8,12 +8,26 @@ public class PlayVector {
     for (int i = 0; i < vector.length; i++) {
       vector[i] = state[i].equals("1") ? 0.0 : 1.0;
     }
-    normalize();
   }
 
   public PlayVector (double[] vector) {
     this.vector = vector;
-    normalize();
+  }
+
+  public void train (int action, double feedback, double learningRate) {
+    vector[action] += learningRate * feedback;
+  }
+
+  private double[] normalize () {
+    double[] normalized = new double[vector.length];
+    double acc = 0;
+    for (double i:vector) {
+      acc += i;
+    }
+    for (int i = 0; i < vector.length; i++) {
+      normalized[i] = acc > 0 ? vector[i] / acc : 0;
+    }
+    return normalized;
   }
   
   public double getMax () {
@@ -34,26 +48,12 @@ public class PlayVector {
     return acc;
   }
 
-  public void normalize () {
-    double acc = 0;
-    for (double i:vector) {
-      acc += i;
-    }
-    if (acc != 0) {
-      acc = 1 / acc;
-    } else {
-      acc = 0;
-    }
-    for (int i = 0; i < vector.length; i++) {
-      vector[i] *= acc;
-    }
-  }
-
   public int randomPick () {
     double random = Math.random();
     double acc = 0;
-    for (int i = 0; i < vector.length; i++) {
-      acc += vector[i];
+    double[] normalized = normalize();
+    for (int i = 0; i < normalized.length; i++) {
+      acc += normalized[i];
       if (random <= acc) {
         return i;
       }

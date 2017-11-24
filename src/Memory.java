@@ -7,8 +7,12 @@ import java.io.FileWriter;
 
 public class Memory {
   
+  static private final double learningRate = 0.1;
+  static private final double discountFactor = 0.9;
   static private final String filename = "./qlearning-memory.txt";
+
   private Hashtable<Integer, PlayVector> memory;
+  private ArrayList<Integer[]> history = new ArrayList<Integer[]>();
 
   public Memory () {
     try {
@@ -24,6 +28,26 @@ public class Memory {
   
   public Hashtable<Integer, PlayVector> getValue () {
     return memory;
+  }
+
+  public void addPlay (Integer state, Integer action) {
+    System.out.println("Añadiendo dato a historico: (" + state + ", " + action + ")");
+    Integer[] arr = {state, action, null};
+    history.add(arr);
+  }
+
+  public void train (double feedback) {
+    System.out.println("Training with feedback: " + feedback);
+    Integer[] played;
+    Integer state, action;
+    for (int i = (history.size() - 1); i >= 0; i--) {
+      played = history.get(i);
+      state = played[0];
+      action = played[1];
+      memory.get(state).train(action, feedback, learningRate);
+      feedback *= discountFactor;
+    }
+    saveToFile();
   }
 
   private Hashtable<Integer, PlayVector> loadFromFile () throws Exception {
@@ -83,7 +107,7 @@ public class Memory {
   }
 
   public void populate () {
-    for (int i = 0; i < (Math.pow(2, 12) - 1); i++) {
+    for (int i = 0; i < Math.pow(2, 12); i++) {
       memory.put(i, generateVectorFromState(i));
     }
   }

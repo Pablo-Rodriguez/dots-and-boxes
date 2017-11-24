@@ -5,12 +5,16 @@ public class StateActionPair {
 
   private int x;
   private int y;
+  private int state;
+  private Memory memory;
   private PlayVector vector;
 
-  public StateActionPair (ArrayList<Edge> edges, Hashtable<Integer, PlayVector> memory, int x, int y) {
+  public StateActionPair (ArrayList<Edge> edges, Memory memory, int x, int y) {
     this.x = x;
     this.y = y;
-    this.vector = memory.get(getState(edges, x, y));
+    this.memory = memory;
+    this.state = getState(edges, x, y);
+    this.vector = memory.getValue().get(this.state);
   }
 
   public String findEdge (ArrayList<Edge> edges, Edge against) {
@@ -68,6 +72,8 @@ public class StateActionPair {
   }
 
   public Edge randomPick () {
-    return actionToEdge(vector.randomPick());
+    int nextAction = vector.randomPick();
+    memory.addPlay(this.state, nextAction);
+    return actionToEdge(nextAction);
   }
 }
