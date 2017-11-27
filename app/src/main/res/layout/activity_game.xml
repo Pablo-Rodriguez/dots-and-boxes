@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.dots_and_boxes.Game">
+
+
+    <ImageView
+        android:id="@+id/point00"
+        android:layout_width="15dp"
+        android:layout_height="26dp"
+        android:src="@drawable/point"
+        android:baselineAlignBottom="true"
+        android:layout_marginLeft="65dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="120dp" />
+
+
+    <ImageView
+        android:id="@+id/point10"
+        android:layout_width="15dp"
+        android:layout_height="26dp"
+        android:src="@drawable/point"
+        android:baselineAlignBottom="true"
+        app:layout_constraintBaseline_toBaselineOf="@+id/point00"
+        app:layout_constraintLeft_toRightOf="@+id/point00"
+        android:layout_marginLeft="75dp" />
+
+    <ImageView
+        android:id="@+id/point20"
+        android:layout_width="15dp"
+        android:layout_height="26dp"
+        android:baselineAlignBottom="true"
+        android:src="@drawable/point"
+        app:layout_constraintBaseline_toBaselineOf="@+id/point00"
+        app:layout_constraintLeft_toRightOf="@+id/point10"
+        android:layout_marginLeft="73dp" />
+
+
+
+    <ImageView
+        android:id="@+id/point30"
+        android:layout_width="15dp"
+        android:layout_height="26dp"
+        android:baselineAlignBottom="true"
+        android:src="@drawable/point"
+        app:layout_constraintBaseline_toBaselineOf="@+id/point00"
+        app:layout_constraintLeft_toRightOf="@+id/point20"
+        android:layout_marginLeft="70dp" />
+
+
+
+
+    <ImageView
+        android:id="@+id/edge0010"
+        android:layout_width="65dp"
+        android:layout_height="30dp"
+         
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:baselineAlignBottom="true"
+        app:layout_constraintHorizontal_bias="0.238"
+        app:layout_constraintBaseline_toBaselineOf="@+id/point00"
+        android:layout_marginLeft="8dp" />
+
+
+    <ImageView
+        android:id="@+id/edge2030"
+        android:layout_width="65dp"
+        android:layout_height="30dp"
+        android:baselineAlignBottom="true"
+         
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBaseline_toBaselineOf="@+id/point20"
+        android:layout_marginLeft="263dp" />
+
+    <ImageView
+        android:id="@+id/edge1020"
+        android:layout_width="65dp"
+        android:layout_height="30dp"
+        android:baselineAlignBottom="true"
+         
+        app:layout_constraintLeft_toRightOf="@+id/point10"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/point10" />
+
+
+    <ImageView
+        android:id="@+id/edge0001"
+        android:layout_width="30dp"
+        android:layout_height="65dp"
+         
+        android:baselineAlignBottom="true"
+        android:layout_marginTop="-12dp"
+        app:layout_constraintTop_toBottomOf="@+id/point00"
+        android:layout_marginLeft="50dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/edge1011"
+        android:layout_width="30dp"
+        android:layout_height="65dp"
+         
+        android:baselineAlignBottom="true"
+        android:layout_marginTop="-12dp"
+        app:layout_constraintTop_toBottomOf="@+id/point10"
+        android:layout_marginLeft="141dp"
+        app:layout_constraintLeft_toLeftOf="parent"  />
+
+    <ImageView
+        android:id="@+id/edge2021"
+        android:layout_width="30dp"
+        android:layout_height="65dp"
+         
+        android:baselineAlignBottom="true"
+        android:layout_marginTop="-12dp"
+        app:layout_constraintTop_toBottomOf="@+id/point20"
+        android:layout_marginLeft="229dp"
+        app:layout_constraintLeft_toLeftOf="parent"  />
+
+    <ImageView
+        android:id="@+id/edge3031"
+        android:layout_width="30dp"
+        android:layout_height="65dp"
+         
+        android:baselineAlignBottom="true"
+        android:layout_marginTop="-12dp"
+        app:layout_constraintTop_toBottomOf="@+id/point30"
+        android:layout_marginLeft="315dp"
+        app:layout_constraintLeft_toLeftOf="parent"  />
+
+
+
+    <ImageView
+        android:id="@+id/point01"
+        android:layout_width="15dp"
+        android:layout_height="26dp"
+        android:src="@drawable/point"
+        android:baselineAlignBottom="true"
+        android:layout_marginLeft="65dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="216dp" />
+
+
+    <ImageView
+        android:id="@+id/point11"
+        android:layout_width="15dp"
+        android:layout_height="26dp"
+        android:src="@drawable/point"
+        android:baselineAlignBottom="true"
+        app:layout_constraintBaseline_toBaselineOf="@+id/point01"
+        app:layout_constraintLeft_toRightOf="@+id/point01"
+        android:layout_marginLeft="75dp" />
+
+    <ImageView
+        android:id="@+id/point21"
+        android:layout_width="15dp"
+        android:layout_height="26dp"
+        android:baselineAlignBottom="true"
+        android:src="@drawable/point"
+        app:layout_constraintBaseline_toBaselineOf="@+id/point01"
+        app:layout_constraintLeft_toRightOf="@+id/point11"
+        android:layout_marginLeft="73dp" />
+
+
+
+    <ImageView
+        android:id="@+id/point31"
+        android:layout_width="15dp"
+        android:layout_height="26dp"
+        android:baselineAlignBottom="true"
+        android:src="@drawable/point"
+        app:layout_constraintBaseline_toBaselineOf="@+id/point01"
+        app:layout_constraintLeft_toRightOf="@+id/point21"
+        android:layout_marginLeft="70dp" />
+
+
+
+
+    <ImageView
+        android:id="@+id/edge0111"
+        android:layout_width="65dp"
+        android:layout_height="30dp"
+         
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:baselineAlignBottom="true"
+        app:layout_constraintHorizontal_bias="0.238"
+        app:layout_constraintBaseline_toBaselineOf="@+id/point01" />
+
+
+    <ImageView
+        android:id="@+id/edge2131"
+        android:layout_width="65dp"
+        android:layout_height="30dp"
+        android:baselineAlignBottom="true"
+         
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBaseline_toBaselineOf="@+id/point21"
+        android:layout_marginLeft="263dp" />
+
+    <ImageView
+        android:id="@+id/edge1121"
+        android:layout_width="65dp"
+        android:layout_height="30dp"
+        android:baselineAlignBottom="true"
+         
+        app:layout_constraintLeft_toRightOf="@+id/point11"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/point11" />
+
+    <ImageView
+        android:id="@+id/edge0102"
+        android:layout_width="30dp"
+        android:layout_height="65dp"
+         
+        android:baselineAlignBottom="true"
+        android:layout_marginTop="-8dp"
+        app:layout_constraintTop_toBottomOf="@+id/point01"
+        android:layout_marginLeft="50dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <ImageView
+        android:id="@+id/edge1112"
+        android:layout_width="30dp"
+        android:layout_height="65dp"
+         
+        android:baselineAlignBottom="true"
+        android:layout_marginTop="-8dp"
+        app:layout_constraintTop_toBottomOf="@+id/point11"
+        android:layout_marginLeft="141dp"
+        app:layout_constraintLeft_toLeftOf="parent"  />
+
+    <ImageView
+        android:id="@+id/edge2122"
+        android:layout_width="30dp"
+        android:layout_height="65dp"
+         
+        android:baselineAlignBottom="true"
+        android:layout_marginTop="-8dp"
+        app:layout_constraintTop_toBottomOf="@+id/point21"
+        android:layout_marginLeft="229dp"
+        app:layout_constraintLeft_toLeftOf="parent"  />
+    <ImageView
+        android:id="@+id/edge3132"
+        android:layout_width="30dp"
+        android:layout_height="65dp"
+         
+        android:baselineAlignBottom="true"
+        android:layout_marginTop="-8dp"
+        app:layout_constraintTop_toBottomOf="@+id/point31"
+        android:layout_marginLeft="315dp"
+        app:layout_constraintLeft_toLeftOf="parent"  />
+
+    <ImageView
+        android:id="@+id/point02"
+        android:layout_width="15dp"
+        android:layout_height="26dp"
+        android:src="@drawable/point"
+        android:baselineAlignBottom="true"
+        android:layout_marginLeft="65dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="307dp" />
+
+
+    <ImageView
+        android:id="@+id/point12"
+        android:layout_width="15dp"
+        android:layout_height="26dp"
+        android:src="@drawable/point"
+        android:baselineAlignBottom="true"
+        app:layout_constraintBaseline_toBaselineOf="@+id/point02"
+        app:layout_constraintLeft_toRightOf="@+id/point02"
+        android:layout_marginLeft="75dp" />
+
+    <ImageView
+        android:id="@+id/point22"
+        android:layout_width="15dp"
+        android:layout_height="26dp"
+        android:baselineAlignBottom="true"
+        android:src="@drawable/point"
+        app:layout_constraintBaseline_toBaselineOf="@+id/point02"
+        app:layout_constraintLeft_toRightOf="@+id/point12"
+        android:layout_marginLeft="73dp" />
+
+
+
+    <ImageView
+        android:id="@+id/point32"
+        android:layout_width="15dp"
+        android:layout_height="26dp"
+        android:baselineAlignBottom="true"
+        android:src="@drawable/point"
+        app:layout_constraintBaseline_toBaselineOf="@+id/point02"
+        app:layout_constraintLeft_toRightOf="@+id/point22"
+        android:layout_marginLeft="70dp" />
+
+
+    <ImageView
+        android:id="@+id/edge0212"
+        android:layout_width="65dp"
+        android:layout_height="30dp"
+         
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:baselineAlignBottom="true"
+        app:layout_constraintHorizontal_bias="0.238"
+        app:layout_constraintBaseline_toBaselineOf="@+id/point02" />
+
+
+    <ImageView
+        android:id="@+id/edge2232"
+        android:layout_width="65dp"
+        android:layout_height="30dp"
+        android:baselineAlignBottom="true"
+         
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBaseline_toBaselineOf="@+id/point22"
+        android:layout_marginLeft="263dp" />
+
+    <ImageView
+        android:id="@+id/edge1222"
+        android:layout_width="65dp"
+        android:layout_height="30dp"
+        android:baselineAlignBottom="true"
+         
+        app:layout_constraintLeft_toRightOf="@+id/point12"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/point12" />
+
+    <ImageView
+        android:id="@+id/edge0203"
+        android:layout_width="30dp"
+        android:layout_height="65dp"
+         
+        android:baselineAlignBottom="true"
+        android:layout_marginTop="-8dp"
+        app:layout_constraintTop_toBottomOf="@+id/point02"
+        android:layout_marginLeft="50dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <ImageView
+        android:id="@+id/edge1213"
+        android:layout_width="30dp"
+        android:layout_height="65dp"
+         
+        android:baselineAlignBottom="true"
+        android:layout_marginTop="-8dp"
+        app:layout_constraintTop_toBottomOf="@+id/point12"
+        android:layout_marginLeft="141dp"
+        app:layout_constraintLeft_toLeftOf="parent"  />
+
+    <ImageView
+        android:id="@+id/edge2223"
+        android:layout_width="30dp"
+        android:layout_height="65dp"
+         
+        android:baselineAlignBottom="true"
+        android:layout_marginTop="-8dp"
+        app:layout_constraintTop_toBottomOf="@+id/point22"
+        android:layout_marginLeft="229dp"
+        app:layout_constraintLeft_toLeftOf="parent"  />
+    <ImageView
+        android:id="@+id/edge3233"
+        android:layout_width="30dp"
+        android:layout_height="65dp"
+         
+        android:baselineAlignBottom="true"
+        android:layout_marginTop="-8dp"
+        app:layout_constraintTop_toBottomOf="@+id/point32"
+        android:layout_marginLeft="315dp"
+        app:layout_constraintLeft_toLeftOf="parent"  />
+
+
+    <ImageView
+        android:id="@+id/point03"
+        android:layout_width="15dp"
+        android:layout_height="26dp"
+        android:src="@drawable/point"
+        android:baselineAlignBottom="true"
+        android:layout_marginLeft="65dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="397dp" />
+
+
+    <ImageView
+        android:id="@+id/point13"
+        android:layout_width="15dp"
+        android:layout_height="26dp"
+        android:src="@drawable/point"
+        android:baselineAlignBottom="true"
+        app:layout_constraintBaseline_toBaselineOf="@+id/point03"
+        app:layout_constraintLeft_toRightOf="@+id/point03"
+        android:layout_marginLeft="75dp" />
+
+    <ImageView
+        android:id="@+id/point23"
+        android:layout_width="15dp"
+        android:layout_height="26dp"
+        android:baselineAlignBottom="true"
+        android:src="@drawable/point"
+        app:layout_constraintBaseline_toBaselineOf="@+id/point03"
+        app:layout_constraintLeft_toRightOf="@+id/point13"
+        android:layout_marginLeft="73dp" />
+
+
+
+    <ImageView
+        android:id="@+id/point33"
+        android:layout_width="15dp"
+        android:layout_height="26dp"
+        android:baselineAlignBottom="true"
+        android:src="@drawable/point"
+        app:layout_constraintBaseline_toBaselineOf="@+id/point03"
+        app:layout_constraintLeft_toRightOf="@+id/point23"
+        android:layout_marginLeft="70dp" />
+
+    <ImageView
+        android:id="@+id/edge0313"
+        android:layout_width="65dp"
+        android:layout_height="30dp"
+         
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:baselineAlignBottom="true"
+        app:layout_constraintHorizontal_bias="0.238"
+        app:layout_constraintBaseline_toBaselineOf="@+id/point03" />
+
+
+    <ImageView
+        android:id="@+id/edge2333"
+        android:layout_width="65dp"
+        android:layout_height="30dp"
+        android:baselineAlignBottom="true"
+         
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBaseline_toBaselineOf="@+id/point23"
+        android:layout_marginLeft="263dp" />
+
+    <ImageView
+        android:id="@+id/edge1323"
+        android:layout_width="65dp"
+        android:layout_height="30dp"
+        android:baselineAlignBottom="true"
+         
+        app:layout_constraintLeft_toRightOf="@+id/point13"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/point13" />
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="16dp"
+        android:text="Machine"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="40dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Player"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="40dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="40dp" />
+
+    <TextView
+        android:id="@+id/player_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="56dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintRight_toLeftOf="@+id/imageView"
+        android:layout_marginRight="8dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginStart="56dp"
+        android:layout_marginEnd="8dp" />
+
+    <TextView
+        android:id="@+id/machine_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="56dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintHorizontal_bias="1.0"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="56dp" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="102dp"
+        android:layout_height="48dp"
+        android:text="Restart"
+        android:onClick="nuevo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="33dp"
+        android:layout_marginRight="40dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="0.568"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="40dp" />
+
+</android.support.constraint.ConstraintLayout>
