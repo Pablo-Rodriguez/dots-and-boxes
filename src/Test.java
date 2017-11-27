@@ -2,7 +2,7 @@ public class Test {
   private static GameManager manager;
 
   public static void main(String[] args) {
-    manager = new GameManager(4, 4);
+    manager = new GameManager(3, 3);
     /*test1();
     test2();*/
   }

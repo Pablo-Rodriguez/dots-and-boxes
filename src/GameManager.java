@@ -36,6 +36,7 @@ public class GameManager {
         }
       } else {
         gameData.addEdge(machine.play());
+        
       }
       if (gameData.getMachinePoints() + gameData.getPlayerPoints() == gameData.getRows() * gameData.getColumns()) {
         endGame();

@@ -2,14 +2,14 @@
 import java.util.*;
 
 public class GameData {
-  
-  private ArrayList<Edge> edges = new ArrayList<Edge>();
+
+  private ArrayList<Edge> edges  = new ArrayList<Edge>();
   private Box[][] matrix;
   private int rows;
   private int columns;
-  public int playerPoints = 0;
-  public int machinePoints = 0; 
-  public boolean playerTurn = true;
+  private int playerPoints = 0;
+  private int machinePoints = 0;
+  private boolean playerTurn = true;
 
   public GameData (int rows, int columns) {
     this.rows = rows;
@@ -17,7 +17,21 @@ public class GameData {
     matrix = new Box[rows][columns];
     populateMatrix();
   }
+  public GameData (ArrayList<Edge> new_edges, Box[][] new_matrix, int rows, int columns, int playerPoints, int machinePoints, boolean playerTurn){
+    edges=new ArrayList<Edge>();
+    this.rows = rows;
+    this.columns = columns;
+    this.playerPoints = playerPoints;
+    this.machinePoints = machinePoints;
+    matrix = new Box[rows][columns];
+    populateMatrix();
+    for(Edge e: new_edges){
+      addEdge(e);
+    }
+    this.playerTurn = playerTurn;
 
+
+  }
   public ArrayList<Edge> getEdges () {
     return this.edges;
   }
@@ -44,7 +58,7 @@ public class GameData {
 
   public boolean isPlayerTurn () {
     return this.playerTurn;
-  } 
+  }
 
   public void setMachinePoints (int machinePoints) {
     this.machinePoints = machinePoints;
@@ -66,7 +80,6 @@ public class GameData {
     if (!isEdgeValid(newEdge)) {
       return false;
     }
-
     for (Edge e : edges) {
       if (e.equals(newEdge)) {
         return false;
