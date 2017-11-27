@@ -15,12 +15,12 @@ public class Machine {
   public boolean canPlaySafely() {
     for (int i = 0; i < gameData.getRows(); i++) {
       for (int j = 0; j < gameData.getColumns(); j++) {
-        if (gameData.getMatrix()[i][j].getEdges() == 3) {
-          return false;
+        if (gameData.getMatrix()[i][j].getEdges() < 3) {
+          return true;
         }
       }
     }
-    return true;
+    return false;
   }
 
   public Edge play() {
