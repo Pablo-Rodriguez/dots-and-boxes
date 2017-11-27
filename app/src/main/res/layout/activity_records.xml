@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.dots_and_boxes.Records">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="228dp"
+        android:layout_height="156dp"
+        android:src="@drawable/scores"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="0dp" />
+
+    <Button
+        android:id="@+id/size11"
+        android:layout_width="95dp"
+        android:layout_height="36dp"
+        android:layout_marginLeft="36dp"
+        android:text="3x3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="128dp" />
+
+    <Button
+        android:id="@+id/size33"
+        android:layout_width="95dp"
+        android:layout_height="36dp"
+        android:layout_marginLeft="17dp"
+        android:text="5x5"
+        app:layout_constraintLeft_toRightOf="@+id/size11"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.829"
+        app:layout_constraintBaseline_toBaselineOf="@+id/size11" />
+
+
+    <TextView
+        android:id="@+id/puntuaciones"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.481" />
+
+    <Button
+        android:id="@+id/level1_1"
+        android:layout_width="95dp"
+        android:layout_height="36dp"
+        android:text="Easy"
+        android:layout_marginLeft="36dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="44dp" />
+    <Button
+        android:id="@+id/level2_2"
+        android:layout_width="95dp"
+        android:layout_height="36dp"
+        android:text="Medium"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintBaseline_toBaselineOf="@+id/level1_1" />
+    <Button
+        android:id="@+id/level3_3"
+        android:layout_width="95dp"
+        android:layout_height="36dp"
+        android:text="Difficult"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.921"
+        app:layout_constraintBaseline_toBaselineOf="@+id/level1_1"
+        android:layout_marginRight="8dp" />
+
+    <Button
+        android:id="@+id/newGame"
+        android:layout_width="95dp"
+        android:layout_height="36dp"
+        android:onClick="nuevo"
+        android:text="New game"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="193dp" />
+
+</android.support.constraint.ConstraintLayout>

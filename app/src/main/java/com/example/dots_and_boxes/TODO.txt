@@ -1,0 +1,3 @@
+-tablero
+-memorizar opcion de juego
+-records: si selecciono un nivel que se deseleccione el otro, etc
